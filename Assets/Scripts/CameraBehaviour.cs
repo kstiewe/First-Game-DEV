@@ -1,23 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class CameraBehaviour : MonoBehaviour
 {
+    [SerializeField]private CharacterController _playerCharacterController;
     private float _xRotation = 0f;
     private float _yPosition = 0f;
-    public GameObject player;
     private float _playerHeight;
-    // Start is called before the first frame update
+
     void Start(){
-        _playerHeight = player.GetComponent<CharacterController>().height;
+        _playerHeight = _playerCharacterController.height;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        _xRotation += -(Input.GetAxis("Mouse Y") * PlayerMovement._rotationSpeed * Time.deltaTime);
-        _xRotation = Mathf.Clamp(_xRotation, -90f,90f);
+        _xRotation -= Input.GetAxis("Mouse Y") * PlayerMovement._rotationSpeed * Time.deltaTime;
+        _xRotation = Mathf.Clamp(_xRotation, -90f, 90f);
         transform.localRotation = Quaternion.Euler(_xRotation, 0f, 0f);
         _yPosition = transform.position.y;
         if(Input.GetKey(KeyCode.LeftControl)){

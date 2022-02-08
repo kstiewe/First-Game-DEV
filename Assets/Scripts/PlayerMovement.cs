@@ -4,29 +4,34 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    private float _movementSpeed = 5f;
-    [HideInInspector]static public float _rotationSpeed = 1000f;
+    private float _movementSpeed = 6f;
+    private float _jumpSpeed = 8f;
     private Vector3 _direction = new Vector3(0, 0, 0);
+    private CharacterController _controller;
+    private float _yVelocity = 0;
+ 
+    [HideInInspector]static public float _rotationSpeed = 1000f;
 
     void Start(){
         Cursor.lockState = CursorLockMode.Locked;
+        _controller = GetComponent<CharacterController>();
     }
 
     void Update(){
-        if(Input.GetKey("w")){
-            _direction += transform.forward;
+        if (_controller.isGrounded) _yVelocity = Physics.gravity.y * Time.deltaTime;
+        else
+        {
+            _yVelocity += Physics.gravity.y * Time.deltaTime;
         }
-        if(Input.GetKey("s")){
-            _direction += -transform.forward;
+        _direction = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+        _direction = transform.TransformDirection(_direction);
+        _direction *= _movementSpeed;
+        if (Input.GetKey(KeyCode.Space) && _controller.isGrounded)
+        {
+            _yVelocity = _jumpSpeed;
         }
-        if(Input.GetKey("a")){
-            _direction += -transform.right;
-        }
-        if(Input.GetKey("d")){
-            _direction += transform.right;
-        }
+        _direction.y += _yVelocity;
+        _controller.Move(_direction * Time.deltaTime);
         transform.Rotate(0, (Input.GetAxis("Mouse X") * _rotationSpeed * Time.deltaTime), 0);
-        transform.position += _direction * Time.deltaTime * _movementSpeed;
-        _direction = new Vector3(0, 0, 0);
     }
 }
