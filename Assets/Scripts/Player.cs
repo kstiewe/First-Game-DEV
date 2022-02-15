@@ -5,16 +5,12 @@ using UnityEngine.UI;
 
 public class Player : Character
 {
-    [SerializeField] private GameObject _containerWithSlider;
-    private Slider _characterHealthSlider;
+    [SerializeField] private Slider _characterHealthSlider;
 
-    protected override void DoAwake()
-    {
-        _characterHealthSlider = _containerWithSlider.GetComponent<Slider>();
-    }
+    protected override void DoAwake() { }
 
     private void FixedUpdate()
     {
-        _characterHealthSlider.value = GetHealth()/baseHealth;
+        _characterHealthSlider.value = GetHealth() / baseHealth;
     }
 }
