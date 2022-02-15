@@ -35,7 +35,7 @@ public class PlayerMovement : MonoBehaviour
     {
         _direction = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
         _direction = transform.TransformDirection(_direction);
-        if (!Input.GetKey(KeyCode.LeftControl) && !Input.GetKeyDown(KeyCode.LeftControl) && Input.GetKey(KeyCode.LeftShift) && _controller.isGrounded)
+        if (!Input.GetKey(KeyCode.LeftControl) && Input.GetKey(KeyCode.LeftShift) && _controller.isGrounded)
         {
             _player.IncreaseSpeedClamped(_player.GetSpeed() * Time.deltaTime);
         }
@@ -63,7 +63,7 @@ public class PlayerMovement : MonoBehaviour
     }
     void CrouchingMechanics()
     {
-        if (Input.GetKey(KeyCode.LeftControl) && !Input.GetKey(KeyCode.LeftShift) && !Input.GetKeyDown(KeyCode.LeftShift))
+        if (Input.GetKey(KeyCode.LeftControl) && !Input.GetKey(KeyCode.LeftShift))
         {
             _crouchCharControllerAnimator.SetBool("isCrouching", true);
             _crouchCameraAnimator.SetBool("isCrouching", true);
