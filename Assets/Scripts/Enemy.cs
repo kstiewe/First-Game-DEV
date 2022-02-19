@@ -7,6 +7,7 @@ public class Enemy : Character
     private RaycastHit _hit;
     private Vector3 _RaycastDirection;
     private Ray _PlayerEnemyRay;
+
     protected override void DoAwake() { }
 
     private void FixedUpdate()
