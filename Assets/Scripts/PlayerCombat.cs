@@ -28,8 +28,8 @@ public class PlayerCombat : MonoBehaviour
         }
         else
         {
-            _rayDurationTime = 0.0f;
             _debugRayColor = Color.green;
+            _rayDurationTime = 0.0f;
         }
 
         DrawDebugRay(ray, _debugRayColor, _rayDurationTime);
