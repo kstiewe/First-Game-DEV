@@ -45,7 +45,7 @@ public class PlayerCombat : MonoBehaviour
             hitInfo: out hit,
             maxDistance: _weaponMaxRange))
         {
-            print("Object hit. Tag: " + hit.collider.tag + " Layer: " + hit.collider.gameObject.layer);
+            print("Object hit. Tag: " + hit.collider.tag + "; Layer: " + LayerMask.LayerToName(hit.collider.gameObject.layer));
         }
     }
 
