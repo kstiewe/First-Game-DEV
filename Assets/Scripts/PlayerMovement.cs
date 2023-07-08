@@ -47,7 +47,6 @@ public class PlayerMovement : MonoBehaviour
     }
     void JumpingMechanics()
     {
-
         if (Input.GetKey(KeyCode.Space) && _controller.isGrounded)
         {
             _yVelocity = _player.jumpSpeed;
